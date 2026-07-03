@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmos - Professor Willian dos Reis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-problema {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-problema:hover {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-problema:active {
+            transform: translateY(0);
+        }
+
+        .btn-sair {
+            grid-column: 1 / -1;
+            background: #fc8181;
+            border: 2px solid #fc8181;
+            color: white;
+        }
+
+        .btn-sair:hover {
+            background: #f56565;
+            border-color: #f56565;
+        }
+
+        .output-area {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+            border: 2px dashed #e2e8f0;
+        }
+
+        .output-area h3 {
+            color: #4a5568;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #output {
+            color: #2d3748;
+            font-size: 15px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #a0aec0;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Algoritmos JavaScript</h1>
+        <p class="subtitle">Professor Willian dos Reis</p>
+
+        <div class="menu-grid">
+            <button class="btn-problema" onclick="problema1()">1️⃣ PA (Progressão Aritmética)</button>
+            <button class="btn-problema" onclick="problema2()">2️⃣ Maior entre dois números</button>
+            <button class="btn-problema" onclick="problema3()">3️⃣ Descidas para Touchdown</button>
+            <button class="btn-problema" onclick="problema4()">4️⃣ NBA vs Brasileirão</button>
+            <button class="btn-problema" onclick="problema5()">5️⃣ Tabuada</button>
+            <button class="btn-problema" onclick="problema6()">6️⃣ Fatorial</button>
+            <button class="btn-problema" onclick="problema7()">7️⃣ Positivo ou Negativo</button>
+            <button class="btn-problema" onclick="problema8()">8️⃣ Média Escolar</button>
+            <button class="btn-problema" onclick="problema9()">9️⃣ Reajuste Salarial</button>
+            <button class="btn-problema" onclick="problema10()">🔟 Idade de Fábio</button>
+            <button class="btn-problema btn-sair" onclick="sair()">❌ Sair</button>
+        </div>
+
+        <div class="output-area">
+            <h3>📝 Resultado</h3>
+            <div id="output">Clique em um botão acima para executar um algoritmo...</div>
+        </div>
+
+        <div class="footer">Desenvolvido para Professor Willian dos Reis</div>
+    </div>
+
+    <script>
+        // Função para exibir resultados na tela
+        function exibirResultado(mensagem) {
+            document.getElementById('output').textContent = mensagem;
+        }
+
+        // =============================================
+        // 1 - PROGRESSÃO ARITMÉTICA (PA)
+        // =============================================
+        function problema1() {
+            let inicio = parseInt(prompt("Digite o número inicial:"));
+            let razao = parseInt(prompt("Digite a razão da PA:"));
+            let limite = parseInt(prompt("Digite o limite:"));
+
+            if (isNaN(inicio) || isNaN(razao) || isNaN(limite)) {
+                exibirResultado("❌ ERRO: Por favor, digite números válidos!");
+                return;
+            }
+
+            if (limite <= inicio) {
+                exibirResultado("❌ ERRO: O limite deve ser superior ao início!");
+                return;
+            }
+
+            let sequencia = [];
+            for (let i = inicio; i <= limite; i += razao) {
+                sequencia.push(i);
+            }
+            exibirResultado(`📊 PROGRESSÃO ARITMÉTICA\nInício: ${inicio}\nRazão: ${razao}\nLimite: ${limite}\n\nSequência: ${sequencia.join(" → ")}`);
+        }
+
+        // =============================================
+        // 2 - MAIOR ENTRE DOIS NÚMEROS
+        // =============================================
+        function problema2() {
+            let num1 = parseFloat(prompt("Digite o primeiro número:"));
+            let num2 = parseFloat(prompt("Digite o segundo número:"));
+
+            if (isNaN(num1) || isNaN(num2)) {
+                exibirResultado("❌ ERRO: Por favor, digite números válidos!");
+                return;
+            }
+
+            let maior = (num1 > num2) ? num1 : num2;
+            let menor = (num1 < num2) ? num1 : num2;
+            
+            if (num1 === num2) {
+                exibirResultado(`📊 MAIOR ENTRE DOIS NÚMEROS\nNúmeros: ${num1} e ${num2}\n\nOs dois números são IGUAIS!`);
+            } else {
+                exibirResultado(`📊 MAIOR ENTRE DOIS NÚMEROS\nNúmeros: ${num1} e ${num2}\n\nMaior número: ${maior}\nMenor número: ${menor}`);
+            }
+        }
+
+        // =============================================
+        // 3 - DESCIDAS PARA TOUCHDOWN (Futebol Americano)
+        // =============================================
+        function problema3() {
+            const JARDAS_NECESSARIAS = 12;
+            const JARDAS_INICIAL = 1;
+            const JARDAS_POR_DESCIDA = 3;
+            
+            let jardasRestantes = JARDAS_NECESSARIAS - JARDAS_INICIAL;
+            let descidasNecessarias = Math.ceil(jardasRestantes / JARDAS_POR_DESCIDA);
+            
+            if (descidasNecessarias < 3) descidasNecessarias = 3;
+            
+            exibirResultado(`🏈 TOUCHDOWN - FUTEBOL AMERICANO\nJardas necessárias: ${JARDAS_NECESSARIAS} jardas\nJardas iniciais: ${JARDAS_INICIAL} jarda\nJardas por descida: ${JARDAS_POR_DESCIDA} jardas\n\n📊 São necessárias ${descidasNecessarias} descidas para fazer um touchdown.`);
+        }
+
+        // =============================================
+        // 4 - PONTOS NBA vs GOLS BRASILEIRÃO
+        // =============================================
+        function problema4() {
+            const PONTOS_NBA = 200;
+            const TEMPO_NBA = 48;
+            const GOLS_BRASILEIRAO = 2.53;
+            const TEMPO_BRASILEIRAO = 96;
+            
+            let pontosPorMinutoNBA = PONTOS_NBA / TEMPO_NBA;
+            let golsPorMinutoBrasileirao = GOLS_BRASILEIRAO / TEMPO_BRASILEIRAO;
+            let diferenca = pontosPorMinutoNBA - golsPorMinutoBrasileirao;
+            let proporcao = pontosPorMinutoNBA / golsPorMinutoBrasileirao;
+            
+            exibirResultado(`🏀 NBA vs ⚽ BRASILEIRÃO\n\nNBA:\n• ${PONTOS_NBA} pontos em ${TEMPO_NBA} minutos\n• ${pontosPorMinutoNBA.toFixed(3)} pontos/minuto\n\nBrasileirão:\n• ${GOLS_BRASILEIRAO} gols em ${TEMPO_BRASILEIRAO} minutos\n• ${golsPorMinutoBrasileirao.toFixed(3)} gols/minuto\n\n📊 DIFERENÇA:\n• ${diferenca.toFixed(3)} pontos/minuto a mais na NBA\n• A NBA faz ${proporcao.toFixed(2)}x mais pontos por minuto que o Brasileirão faz gols`);
+        }
+
+        // =============================================
+        // 5 - TABUADA
+        // =============================================
+        function problema5() {
+            let numero = parseInt(prompt("Digite o número da tabuada:"));
+            let ate = parseInt(prompt("Até que número você quer ver a tabuada?"));
+
+            if (isNaN(numero) || isNaN(ate) || ate < 1) {
+                exibirResultado("❌ ERRO: Por favor, digite números válidos!");
+                return;
+            }
+
+            let resultado = `📊 TABUADA DO ${numero}\n`;
+            resultado += `─".repeat(30)}\n`;
+            for (let i = 1; i <= ate; i++) {
+                let calc = numero * i;
+                resultado += `${numero} × ${i} = ${calc}\n`;
+            }
+            exibirResultado(resultado);
+        }
+
+        // =============================================
+        // 6 - FATORIAL
+        // =============================================
+        function problema6() {
+            let numero = parseInt(prompt("Digite um número para calcular o fatorial:"));
+
+            if (isNaN(numero)) {
+                exibirResultado("❌ ERRO: Por favor, digite um número válido!");
+                return;
+            }
+
+            if (numero < 0) {
+                exibirResultado("❌ ERRO: Não existe fatorial de número negativo!");
+                return;
+            }
+
+            let fatorial = 1;
+            let calculo = "";
+            for (let i = numero; i >= 1; i--) {
+                fatorial *= i;
+                calculo += i;
+                if (i > 1) calculo += " × ";
+            }
+
+            exibirResultado(`📊 FATORIAL DE ${numero}\n\n${numero}! = ${calculo}\n\nResultado: ${fatorial.toLocaleString()}`);
+        }
+
+        // =============================================
+        // 7 - POSITIVO OU NEGATIVO
+        // =============================================
+        function problema7() {
+            let numero = parseFloat(prompt("Digite um número:"));
+
+            if (isNaN(numero)) {
+                exibirResultado("❌ ERRO: Por favor, digite um número válido!");
+                return;
+            }
+
+            let classificacao;
+            let emoji;
+            if (numero > 0) {
+                classificacao = "POSITIVO";
+                emoji = "➕";
+            } else if (numero < 0) {
+                classificacao = "NEGATIVO";
+                emoji = "➖";
+            } else {
+                classificacao = "ZERO";
+                emoji = "0️⃣";
+            }
+
+            exibirResultado(`📊 CLASSIFICAÇÃO DO NÚMERO\nNúmero: ${numero}\n\nClassificação: ${emoji} ${classificacao}`);
+        }
+
+        // =============================================
+        // 8 - MÉDIA ESCOLAR
+        // =============================================
+        function problema8() {
+            let notas = [];
+            for (let i = 1; i <= 4; i++) {
+                let nota = parseFloat(prompt(`Digite a ${i}ª nota (0-100):`));
+                if (isNaN(nota) || nota < 0 || nota > 100) {
+                    exibirResultado("❌ ERRO: As notas devem ser números entre 0 e 100!");
+                    return;
+                }
+                notas.push(nota);
+            }
+
+            let soma = 0;
+            for (let nota of notas) {
+                soma += nota;
+            }
+            let media = soma / notas.length;
+
+            let status, emoji;
+            if (media >= 70) {
+                status = "APROVADO";
+                emoji = "✅";
+            } else if (media >= 50) {
+                status = "RECUPERAÇÃO";
+                emoji = "⚠️";
+            } else {
+                status = "REPROVADO";
+                emoji = "❌";
+            }
+
+            exibirResultado(`📊 MÉDIA ESCOLAR\nNotas: ${notas.join(", ")}\nMédia: ${media.toFixed(1)}\n\nStatus: ${emoji} ${status}`);
+        }
+
+        // =============================================
+        // 9 - REAJUSTE SALARIAL
+        // =============================================
+        function problema9() {
+            let salarioAtual = parseFloat(prompt("Digite o salário atual: R$"));
+
+            if (isNaN(salarioAtual) || salarioAtual < 0) {
+                exibirResultado("❌ ERRO: Por favor, digite um salário válido!");
+                return;
+            }
+
+            let percentual;
+            if (salarioAtual <= 280) {
+                percentual = 20;
+            } else if (salarioAtual <= 700) {
+                percentual = 15;
+            } else if (salarioAtual <= 1500) {
+                percentual = 10;
+            } else {
+                percentual = 5;
+            }
+
+            let aumento = salarioAtual * (percentual / 100);
+            let novoSalario = salarioAtual + aumento;
+
+            exibirResultado(`📊 REAJUSTE SALARIAL\n\nSalário antes: R$ ${salarioAtual.toFixed(2)}\nPercentual de aumento: ${percentual}%\nValor do aumento: R$ ${aumento.toFixed(2)}\nNovo salário: R$ ${novoSalario.toFixed(2)}`);
+        }
+
+        // =============================================
+        // 10 - IDADE DE FÁBIO
+        // =============================================
+        function problema10() {
+            let somaMB = 85 * 2;
+            let somaMBF = 90 * 3;
+            let idadeFabio = somaMBF - somaMB;
+
+            exibirResultado(`📊 IDADE DE FÁBIO\n\nMariana + Beatriz = ${somaMB} anos (média = 85)\nMariana + Beatriz + Fábio = ${somaMBF} anos (média = 90)\n\nIdade de Fábio = ${somaMBF} - ${somaMB} = ${idadeFabio} anos\n\n✅ A idade de Fábio é ${idadeFabio} anos.`);
+        }
+
+        // =============================================
+        // SAIR
+        // =============================================
+        function sair() {
+            if (confirm("Deseja realmente sair do programa?")) {
+                exibirResultado("👋 Programa encerrado! Obrigado por usar os algoritmos do Professor Willian dos Reis.");
+                // Desabilitar todos os botões
+                document.querySelectorAll('.btn-problema').forEach(btn => {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'not-allowed';
+                });
+            }
+        }
+
+        // Mensagem inicial
+        exibirResultado("👋 Clique em um botão acima para executar um algoritmo...\n\n📚 Algoritmos desenvolvidos para o Professor Willian dos Reis");
+    </script>
+    <link rel="stylesheet" href="main.js">
+</body>
+</html>
